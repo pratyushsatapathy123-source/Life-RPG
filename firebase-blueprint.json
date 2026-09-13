@@ -1,0 +1,214 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and progression data",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 200 },
+        "avatarUrl": { "type": "string", "maxLength": 500 },
+        "level": { "type": "number" },
+        "xp": { "type": "number" },
+        "xpToNextLevel": { "type": "number" },
+        "coins": { "type": "number" },
+        "currentStreak": { "type": "number" },
+        "bestStreak": { "type": "number" },
+        "totalQuestsCompleted": { "type": "number" },
+        "totalFocusMinutes": { "type": "number" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      },
+      "required": ["uid", "createdAt"]
+    },
+    "UserPreferences": {
+      "title": "UserPreferences",
+      "description": "User preferences",
+      "type": "object",
+      "properties": {
+        "mainGoals": { "type": "array" },
+        "categories": { "type": "array" },
+        "preferredDifficulty": { "type": "string", "maxLength": 20 },
+        "dailyAvailableMinutes": { "type": "number" },
+        "timezone": { "type": "string", "maxLength": 50 },
+        "onboardingCompleted": { "type": "boolean" }
+      }
+    },
+    "UserStats": {
+      "title": "UserStats",
+      "description": "User RPG stats",
+      "type": "object",
+      "properties": {
+        "strength": { "type": "number" },
+        "intelligence": { "type": "number" },
+        "discipline": { "type": "number" },
+        "vitality": { "type": "number" },
+        "wisdom": { "type": "number" },
+        "charisma": { "type": "number" }
+      }
+    },
+    "Quest": {
+      "title": "Quest",
+      "description": "A user's quest",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "category": { "type": "string", "maxLength": 50 },
+        "difficulty": { "type": "string", "maxLength": 20 },
+        "status": { "type": "string", "maxLength": 20 },
+        "xpReward": { "type": "number" },
+        "coinReward": { "type": "number" },
+        "estimatedMinutes": { "type": "number" },
+        "dueDate": { "type": "string", "maxLength": 50 },
+        "recurring": { "type": "boolean" },
+        "recurrenceType": { "type": "string", "maxLength": 20 },
+        "relatedStat": { "type": "string", "maxLength": 20 },
+        "completedAt": { "type": "timestamp" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      },
+      "required": ["id", "title", "createdAt", "updatedAt"]
+    },
+    "Habit": {
+      "title": "Habit",
+      "description": "A user's habit",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 500 },
+        "category": { "type": "string", "maxLength": 50 },
+        "frequency": { "type": "string", "maxLength": 20 },
+        "target": { "type": "number" },
+        "currentStreak": { "type": "number" },
+        "bestStreak": { "type": "number" },
+        "completionRate": { "type": "number" },
+        "lastCompletedDate": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      },
+      "required": ["name", "createdAt", "updatedAt"]
+    },
+    "FocusSession": {
+      "title": "FocusSession",
+      "description": "A focus session",
+      "type": "object",
+      "properties": {
+        "durationMinutes": { "type": "number" },
+        "questId": { "type": "string", "maxLength": 128 },
+        "completed": { "type": "boolean" },
+        "startedAt": { "type": "timestamp" },
+        "completedAt": { "type": "timestamp" }
+      },
+      "required": ["durationMinutes", "startedAt"]
+    },
+    "Reward": {
+      "title": "Reward",
+      "description": "Global reward",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 500 },
+        "cost": { "type": "number" },
+        "category": { "type": "string", "maxLength": 50 },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["name", "cost", "createdAt"]
+    },
+    "UserPurchase": {
+      "title": "UserPurchase",
+      "description": "A user's purchase",
+      "type": "object",
+      "properties": {
+        "rewardId": { "type": "string", "maxLength": 128 },
+        "rewardName": { "type": "string", "maxLength": 100 },
+        "cost": { "type": "number" },
+        "purchasedAt": { "type": "timestamp" }
+      },
+      "required": ["rewardId", "cost", "purchasedAt"]
+    },
+    "Achievement": {
+      "title": "Achievement",
+      "description": "Global achievement",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 500 },
+        "icon": { "type": "string", "maxLength": 50 },
+        "requirementType": { "type": "string", "maxLength": 50 },
+        "requirementValue": { "type": "number" }
+      },
+      "required": ["name"]
+    },
+    "UserAchievement": {
+      "title": "UserAchievement",
+      "description": "A user's unlocked achievement",
+      "type": "object",
+      "properties": {
+        "achievementId": { "type": "string", "maxLength": 128 },
+        "unlockedAt": { "type": "timestamp" }
+      },
+      "required": ["achievementId", "unlockedAt"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "A log of user activity",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "maxLength": 50 },
+        "description": { "type": "string", "maxLength": 500 },
+        "timestamp": { "type": "timestamp" }
+      },
+      "required": ["type", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Core user progression data (read-only for client except for name/avatar, updated by server)"
+    },
+    "/users/{userId}/profile/preferences": {
+      "schema": { "$ref": "#/entities/UserPreferences" },
+      "description": "User preferences (writable by user)"
+    },
+    "/users/{userId}/stats/current": {
+      "schema": { "$ref": "#/entities/UserStats" },
+      "description": "User stats (read-only for client, updated by server)"
+    },
+    "/users/{userId}/quests/{questId}": {
+      "schema": { "$ref": "#/entities/Quest" },
+      "description": "User quests (creatable/updatable by user, but XP/Coins are calculated by server)"
+    },
+    "/users/{userId}/habits/{habitId}": {
+      "schema": { "$ref": "#/entities/Habit" },
+      "description": "User habits (creatable/updatable by user)"
+    },
+    "/users/{userId}/focusSessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/FocusSession" },
+      "description": "User focus sessions (creatable by user)"
+    },
+    "/users/{userId}/purchases/{purchaseId}": {
+      "schema": { "$ref": "#/entities/UserPurchase" },
+      "description": "User reward purchases (read-only for client, created by server)"
+    },
+    "/users/{userId}/achievements/{achievementId}": {
+      "schema": { "$ref": "#/entities/UserAchievement" },
+      "description": "User unlocked achievements (read-only for client, created by server)"
+    },
+    "/users/{userId}/activity/{activityId}": {
+      "schema": { "$ref": "#/entities/ActivityLog" },
+      "description": "User activity logs (read-only for client, created by server)"
+    },
+    "/rewards/{rewardId}": {
+      "schema": { "$ref": "#/entities/Reward" },
+      "description": "Global rewards catalog (read-only for all authenticated users)"
+    },
+    "/achievements/{achievementId}": {
+      "schema": { "$ref": "#/entities/Achievement" },
+      "description": "Global achievements catalog (read-only for all authenticated users)"
+    }
+  }
+}
